@@ -97,7 +97,7 @@ namespace Anoprsst
                 public int SplitAt;
                 public int LastIdx;
 
-#if NETCOREAPP2_1 || NET47
+#if NETSTANDARD2_0
                 static readonly WaitCallback QuickSort_Inclusive_Par2_callback = o => Impl((QuickSort_Inclusive_ParallelArgs)o);
 #else
                 static readonly Action<QuickSort_Inclusive_ParallelArgs> QuickSort_Inclusive_Par2_callback = o => Impl(o);
@@ -123,7 +123,7 @@ namespace Anoprsst
                             LastIdx = lastIdx - (pivot + 1),
                             Ordering = ordering,
                         };
-#if NETCOREAPP2_1 || NET47
+#if NETSTANDARD2_0
                         ThreadPool.UnsafeQueueUserWorkItem(QuickSort_Inclusive_Par2_callback, childCallArgs);
 #else
                         ThreadPool.UnsafeQueueUserWorkItem(QuickSort_Inclusive_Par2_callback, childCallArgs, true);
